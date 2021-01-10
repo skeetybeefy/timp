@@ -26,13 +26,7 @@ const Product = mongoose.model("Product",
 // URLs
 
 app.get("/test", (req, res) => {
-    if (err) {
-        console.log(err)
-        res.sendStatus(500)
-    }
-    else {
-        res.send("Test page, OK")
-    }
+    res.send("OK")
 })
 
 app.get("/api/products/:productID", (req, res) => {
