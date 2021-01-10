@@ -77,6 +77,6 @@ app.get("/api/categories/:categoryName", (req, res) => {
     })
 })
 
-app.listen(serverPort, ()=> {
+app.listen(process.env.PORT || serverPort, ()=> {
     console.log("Server.js has started")
 })
