@@ -1,5 +1,5 @@
 let mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true})
+console.log(mongoose.connect('mongodb+srv://admin:room133bestroom@cluster0.26cnr.mongodb.net/timp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}))
 
 const Product = mongoose.model("Product", 
 {
@@ -32,5 +32,9 @@ const Cart = mongoose.model("Cart",
     }
 }) */
 
- const product1 = new Product({ name: 'Zoloft5', id: "5", agent: "abc" });
-product1.save().then(() => console.log('meow')); 
+/* const product1 = new Product({ name: 'Zoloft5', id: "5", agent: "abc" });
+product1.save().then(() => console.log('meow')); */
+Product.find({country: {$regex: "ро", $options: 'i' }}, (err, doc) => {
+    if (!err) console.log(doc)
+    else console.log(err)
+})

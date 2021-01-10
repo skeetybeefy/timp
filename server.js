@@ -4,7 +4,7 @@ app = express()
 
 // Config
 
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb+srv://admin:room133bestroom@cluster0.26cnr.mongodb.net/timp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
 
 serverPort = 6969
 
@@ -26,8 +26,6 @@ const Product = mongoose.model("Product",
 // URLs
 
 app.get("/api/products/:productID", (req, res) => {
-    console.log(typeof(req.params.productID))
-
     Product.findOne({id: req.params.productID},(err, doc) => {
         if (err) {
             console.log(err)
@@ -42,9 +40,9 @@ app.get("/api/products/:productID", (req, res) => {
 app.get("/api/search/:searchString", (req, res) => {
     Product.find({
         $or: [
-            {name: req.params.searchString},
-            {agent: req.params.searchString},
-            {categories: req.params.searchString}
+            {name: { $regex: req.params.searchString, $options: "i"}},
+            {agent: { $regex: req.params.searchString, $options: "i"}},
+            {categories: { $regex: req.params.searchString, $options: "i"}}
         ]
     }, (err, doc) => {
         if (err) {
@@ -58,7 +56,7 @@ app.get("/api/search/:searchString", (req, res) => {
 })
 
 app.get("/api/categories/:categoryName", (req, res) => {
-    Product.find({categories: req.params.categoryName}, (err, doc) => {
+    Product.find({categories: { $regex: req.params.searchString, $options: "i"}}, (err, doc) => {
         if (err) {
             console.log(err)
             res.sendStatus(500)
