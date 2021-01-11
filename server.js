@@ -1,6 +1,10 @@
 let mongoose = require('mongoose')
 let express = require('express')
+let cors = require('cors')
 app = express()
+
+app.use(cors())
+
 
 // Config
 
