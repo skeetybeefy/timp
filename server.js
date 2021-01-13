@@ -64,7 +64,7 @@ app.get("/api/search/:searchString", (req, res) => {
 })
 
 app.get("/api/categories/:categoryName", (req, res) => {
-    Product.find({categories: { $regex: req.params.searchString, $options: "i"}}, (err, doc) => {
+    Product.find({categories: { $regex: req.params.categoryName, $options: "i"}}, (err, doc) => {
         if (err) {
             console.log(err)
             res.sendStatus(500)
